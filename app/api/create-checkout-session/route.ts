@@ -14,8 +14,9 @@ export async function POST(request: Request) {
       payment_method_types: ['card'],
       line_items: line_items || [],
       mode: 'payment',
-      success_url: success_url || 'https://auroraspiritskies.com/?payment=success',
-      cancel_url: cancel_url || 'https://auroraspiritskies.com/booking',
+            // Force clean full URL + Stripe's recommended placeholder (fixes Safari issue)
+            success_url: 'https://auroraspiritskies.com/payment-success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: 'https://auroraspiritskies.com/booking',
       metadata: metadata || {},
     });
 
